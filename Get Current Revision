@@ -1,0 +1,4 @@
+select PartNum, RevisionNum 
+from( select PartNum, RevisionNum, ROW_NUMBER() OVER(PARTITION BY PartNum ORDER BY EffectiveDate desc, RevisionNum desc) as rn
+from erp.PartRev ) as a
+where rn = 1
