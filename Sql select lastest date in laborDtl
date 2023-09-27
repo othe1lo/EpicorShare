@@ -1,0 +1,6 @@
+Select t0.* from (select t1.JobNum
+	, t2.ClockInDate
+	, Row_Number() OVER (Partition BY t1.JobNum ORDER BY t2.Clockindate desc) as RowNum
+from erp.JobHead t1 with (nolock) 
+	left join erp.LaborDtl t2 with (nolock) on t1.Company = t2.Company and t1.JobNum = t2.JobNum) t0
+where t0.RowNum =1
