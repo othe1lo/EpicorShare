@@ -1,0 +1,11 @@
+Select t0.* from
+		(select t1.PartNum, t1.LineDesc
+			, t2.TypeCode
+			, t1.DueDate
+			,t1.UnitCost
+			, Row_Number() OVER (Partition BY t1.PartNum ORDER BY t1.SysRowID desc) as RowNum
+		from erp.PODetail t1 with (nolock) 
+			 inner join erp.Part t2 with (nolock) on t1.PartNum = t2.PartNum) t0
+where t0.RowNum =1
+
+--select * from erp.PODetail
