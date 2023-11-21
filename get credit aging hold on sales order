@@ -1,0 +1,6 @@
+select 
+case when   (Customer.CreditHold = 1  or Customer.AgingCreditHold =1) and OrderHed.CreditOverride = 1 then 0  
+	when  (Customer.CreditHold = 1  or Customer.AgingCreditHold =1) and OrderHed.CreditOverride = 0 then 1 else 0 end CreditHold
+, OrderNum, Customer.CustNum
+from orderHed 
+	inner join erp.Customer on orderhed.BTCustNum = Customer.CustNum
