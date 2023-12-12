@@ -1,0 +1,6 @@
+select t1.NonConfID, t1.tranqty , t2.X, t1.TranQty - t2.X VArX
+from erp.PartTran  t1 with (nolock)
+	inner join (select NonConfID , SUM(TranQty) X from erp.PartTran 
+			where TranType in('INS-ASM','INS-DMR') group by NonConfID )  t2 on t1.NonConfID = t2.NonConfID
+where TranType ='ASM-INS'
+and  t1.TranQty - t2.X  <>0
