@@ -1,0 +1,10 @@
+----- SET FROM DATE is the first day of you in case user choose status "ALL" and no choose From Date --> so that keep range if there are a lot of data. User can choose from date to the other date in history if they want more
+   IF ((@OpenLineStatus ='' or @OpenLineStatus ='All') and (@FromDate ='17530101' or @FromDate='') )
+	Set @FromDate = DATEFROMPARTS(YEAR(GETDATE()), 1, 1)
+
+	 ((A.OrderDate >=  @FromDate and (@FromDate <>'17530101' and @FromDate<>'')) 
+					or @FromDate is NULL 
+					or @FromDate='17530101') 
+				and ((A.OrderDate <=  @ToDate and (@ToDate <>'17530101' and @ToDate <>'')) 
+					or @ToDate is NULL 
+					or @ToDate='17530101' ) 
