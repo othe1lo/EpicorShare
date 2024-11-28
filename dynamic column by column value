@@ -1,0 +1,23 @@
+	for (int rows = 0; rows < grdData.Rows.Count; rows++)
+			{
+            for (int col = 0; col < grdData.Rows[rows].Cells.Count; col++)
+                {
+                   
+					//var value = decimal.TryParse(grdData.Rows[rows].Cells[col].Value.ToString(), out var temp) ? temp : default(decimal?);
+					// var value = decimal.Parse(grdData.Rows[rows].Cells[col].Value.ToString());
+					decimal value = string.IsNullOrEmpty(grdData.Rows[rows].Cells[col].Value.ToString()) ? 0 : decimal.Parse(grdData.Rows[rows].Cells[col].Value.ToString());
+					Color NewColor = Color.White;
+					if (value>=100)
+						NewColor =Color.LightPink ;
+						else if (value < 10 && value >50 )
+						 NewColor = Color.Yellow;
+						else if (value <= 50 && value >0 )
+						 NewColor =Color.LightGreen;
+						else 
+							 NewColor = Color.White;
+					//Color NewColor = value > 0 ? Color.LightPink : (value < 0 ? Color.LightGreen: Color.White);
+			  		grdData.Rows[rows].Cells[col].Appearance.BackColor = NewColor;
+					
+                }
+			}
+            
